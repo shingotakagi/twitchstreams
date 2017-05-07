@@ -3,9 +3,59 @@
   <head>
     <meta charset="utf-8">
     <title>Twitch Streams</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <script type="text/javascript" src="./script.js"></script>
   </head>
   <body>
-    <p id='streams'> test </p>
+
+    <!-- The main search panel. -->
+    <div class = "search_panel">
+      <div style="width: 100%">
+        <center>
+        <input type="text" id="searchTerm" onkeydown="if (event.keyCode == 13)(results.requestFirstPage(this.value));">
+        <button onclick="results.requestFirstPage(document.querySelector('#searchTerm').value)">Search</button>
+        </center>
+      </div>
+    </div>
+
+
+    <!-- The main results panel. -->
+    <div class = "results_panel">
+      <table class="nav_bar">
+        <tr>
+          <td align = "left">
+            <div id="num_results">Total results: 0</div>
+          </td>
+          <td align = "right">
+            <div>
+              <div class="left_arrow" onmousedown="results.requestPrevPage()"></div>
+              <div class="cursor_info"> 1/1 </div>
+              <div class="right_arrow" onmousedown="results.requestNextPage()"></div>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <div id="streams">
+      </div>
+    </div>
+
+    <!-- Template for the rows in the results panel. -->
+    <template id="stream_template">
+      <div class = "stream_item">
+        <div class = "stream_preview">
+          <center>
+            <a id = "thumbnail_anchor">
+              <img class = "stream_thumbnail"></img>
+            </a>
+          </center>
+        </div>
+        <div class = "stream_info">
+            <div class = "stream_display_name"></div>
+            <div class = "stream_name_and_viewers"></div>
+            <div class = "stream_description"></div>
+        </div>
+      </div>
+    </template>
+
   </body>
 </html>
